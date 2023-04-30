@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     const {text} = apiResponse;
     return new Response(`
       ${text}
-      ${searchParams.get('searchParams') ? `Prompt: ${prompt}` : ''}
+      ${searchParams.get('prompt') ? `Prompt: ${prompt}` : ''}
     `);
   } catch (e) {
     let response = new Response(JSON.stringify(e));
