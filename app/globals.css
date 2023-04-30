@@ -25,3 +25,17 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.input {
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+
+    border: 1px solid rgba(var(--foreground-rgb), 0.2);
+    color: rgb(var(--foreground-rgb));
+}
+
+.input:focus {
+    outline: none;
+    border: none;
+}
