@@ -60,7 +60,7 @@ export default function Home() {
                     </div>
                 ) : (
                     <div className="text-gray-500">
-                        {typeof text === 'string' ? text.split('\n').map(t => <div className="mb-4">{t}</div>) : text.statusText || JSON.stringify(text)}
+                        {typeof text === 'string' ? text.split('\n').map(t => <div className="mb-4" key={t}>{t}</div>) : text.statusText || JSON.stringify(text)}
                     </div>
                 )
             )}
