@@ -1,11 +1,18 @@
 import {ChatGPTAPI} from "chatgpt";
 
 export async function POST(request: Request) {
+  console.log('GPT_API_KEY',process.env.GPT_API_KEY)
   const { searchParams } = new URL(request.url);
   try {
     const {description, language, number} = await request.json()
     const api = new ChatGPTAPI({
       apiKey: process.env.GPT_API_KEY as string,
+      completionParams: {
+        temperature: 0.5,
+        top_p: 0.8,
+        model: "gpt-3.5-turbo"
+      }
+
     })
     const prompt = `
       Write instagram ads for a epoxy and thuya wood necklace. 
@@ -31,10 +38,14 @@ export async function POST(request: Request) {
         French:
           Necklace: collier (masculin).
       ` : ''}
+      ${searchParams.get('prompt') ? 'Say with model version you are at the end' : ''}
     `;
 
-    const {text} = await api.sendMessage(prompt)
+    const apiResponse = await api.sendMessage(prompt)
 
+    console.info('apiResponse', apiResponse)
+
+    const {text} = apiResponse;
     return new Response(`
       ${text}
       ${searchParams.get('searchParams') ? `Prompt: ${prompt}` : ''}
